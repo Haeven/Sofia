@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "sofia-isi",
+    "prod": "sofia-isi"
+  },
+  "targets": {},
+  "etags": {}
+}

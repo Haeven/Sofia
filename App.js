@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, Text, TouchableOpacity, View } from 'react-native';
 
-export default function App() {
+const App = () => {
+  const [clickCount, setClickCount] = useState(0);
+  const [dateClickCount, setDateClickCount] = useState({});
+
+  const handleClick = async () => {
+    const date = new Date().toISOString().split('T')[0];
+    setClickCount(clickCount + 1);
+    setDateClickCount({
+      ...dateClickCount,
+      [date]: (dateClickCount[date] || 0) + 1,
+    });
+
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1 }}>
+      <View style={{ alignItems: 'center', padding: 20 }}>
+        <TouchableOpacity onPress={handleClick}>
+          <Text>Click me!</Text>
+        </TouchableOpacity>
+        <Text>Click count: {clickCount}</Text>
+      </View>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
